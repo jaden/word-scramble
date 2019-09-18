@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Word Scrambler</title>
+  <link rel="stylesheet" href="assets/bulma-0.7.2.min.css">
+
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+
+    @media screen and (min-width: 1068px) {
+      .container {
+        max-width: 600px;
+        width: 600px;
+      }
+    }
+
+    .tada {
+      -webkit-animation-name: tada;
+      animation-name: tada;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes tada {
+      0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+      10%, 20% {
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+      }
+      30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+      }
+      40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+      }
+      100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+    }
+
+    @keyframes tada {
+      0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+      10%, 20% {
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+      }
+      30%, 50%, 70%, 90% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+      }
+      40%, 60%, 80% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+      }
+      100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+    }
+
+    .rubberBand {
+      -webkit-animation-name: rubberBand;
+      animation-name: rubberBand;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes rubberBand {
+      0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+      30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+      }
+      40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+      }
+      50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+      }
+      65% {
+        -webkit-transform: scale3d(.95, 1.05, 1);
+        transform: scale3d(.95, 1.05, 1);
+      }
+      75% {
+        -webkit-transform: scale3d(1.05, .95, 1);
+        transform: scale3d(1.05, .95, 1);
+      }
+      100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+    }
+
+    @keyframes rubberBand {
+      0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+      30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+        transform: scale3d(1.25, 0.75, 1);
+      }
+      40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+        transform: scale3d(0.75, 1.25, 1);
+      }
+      50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+        transform: scale3d(1.15, 0.85, 1);
+      }
+      65% {
+        -webkit-transform: scale3d(.95, 1.05, 1);
+        transform: scale3d(.95, 1.05, 1);
+      }
+      75% {
+        -webkit-transform: scale3d(1.05, .95, 1);
+        transform: scale3d(1.05, .95, 1);
+      }
+      100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="app" class="section" v-cloak>
+
+    <div class="container">
+
+      <h1 class="title">Word Scrambler</h1>
+
+      <div class="box">
+        <p class="has-text-centered is-clearfix">
+          <span class="title">{{ scrambledWord }}</span>
+          <span class="content tag is-rounded is-pulled-right">{{ scrambledWord.length }} letters</span>
+        </p>
+      </div>
+
+      <p v-show="userGuess === revealCode" class="content has-text-centered has-text-info">{{ originalWord }}</p>
+
+      <p v-show="!isCorrectGuess" class="content has-text-centered" style="font-family: monospace">Letters remaining: {{ remainingLetters }}</p>
+
+      <p v-show="invalidGuesses.length > 0 && userGuess !== revealCode" class="content has-text-centered has-text-danger" style="font-family: monospace">Invalid guesses: {{ invalidGuesses.join('') }}</p>
+
+      <div class="field">
+        <div class="control">
+          <input
+            v-model="originalUserGuess"
+            class="input is-large has-text-centered"
+            v-bind:class="{ 'is-primary': isCorrectGuess, 'is-danger': !isCorrectGuess, rubberBand: isCorrectGuess }"
+            ref="guess"
+            type="text"
+            placeholder="Enter your guess here"
+            v-on:keyup.enter="getScrambledWord"
+            autofocus
+          >
+        </div>
+      </div>
+
+      <h1 v-show="isCorrectGuess" class="tada title is-1 has-text-centered has-text-success">Correct!</h1>
+
+      <div class="field">
+        <div class="control">
+          <button @click="getScrambledWord" class="button is-link is-medium is-fullwidth">New Word</button>
+        </div>
+      </div>
+
+      <div class="field is-pulled-right">
+        <label class="label is-uppercase">Difficulty Level</label>
+        <div class="select">
+          <select v-model="difficulty" @change="getScrambledWord" class="is-large">
+            <option value="all">All</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="is-clearfix"></div>
+
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          Built by <a href="https://dan.hersam.com">Dan Hersam</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/vue-2.5.22.min.js"></script>
+  <script src="wordlist.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
