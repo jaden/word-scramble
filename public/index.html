@@ -11,6 +11,15 @@
       display: none;
     }
 
+    html, body {
+      height: 100%;
+    }
+
+    body > footer {
+      position: sticky;
+      top: 100vh;
+    }
+
     @media screen and (min-width: 1068px) {
       .container {
         max-width: 600px;
@@ -147,6 +156,10 @@
 </head>
 <body>
 
+  <script defer src="assets/vue-2.5.22.min.js"></script>
+  <script defer src="wordlist.js"></script>
+  <script defer src="app.js"></script>
+
   <section id="app" class="section" v-cloak>
 
     <div class="container">
@@ -216,10 +229,6 @@
       </div>
     </div>
   </footer>
-
-  <script src="assets/vue-2.5.22.min.js"></script>
-  <script src="wordlist.js"></script>
-  <script src="app.js"></script>
 
 </body>
 </html>
