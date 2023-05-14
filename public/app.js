@@ -35,15 +35,16 @@ function scramble(word) {
   return letters.join('');
 }
 
-new Vue({
-  el: '#app',
-  data: {
-    originalWord: '',
-    scrambledWord: '',
-    originalUserGuess: '',
-    difficulty: LEVEL.MEDIUM,
-    invalidGuesses: [],
-    revealCode: '0',
+const app = Vue.createApp({
+  data() {
+    return {
+      originalWord: '',
+      scrambledWord: '',
+      originalUserGuess: '',
+      difficulty: LEVEL.MEDIUM,
+      invalidGuesses: [],
+      revealCode: '0',
+    };
   },
 
   mounted: function () {
@@ -109,3 +110,5 @@ new Vue({
     },
   },
 });
+
+app.mount('#app');
