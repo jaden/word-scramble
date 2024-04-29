@@ -106,7 +106,17 @@ const app = Vue.createApp({
     },
 
     isCorrectGuess: function () {
-      return this.originalWord === this.userGuess;
+      const isCorrect = this.originalWord !== '' && this.originalWord === this.userGuess;
+
+      if (isCorrect) {
+        confetti({
+          particleCount: 100,
+          spread: 100,
+          origin: { y: 0.8 }
+        });
+      }
+
+      return isCorrect;
     },
   },
 });
