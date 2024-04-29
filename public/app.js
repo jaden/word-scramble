@@ -112,7 +112,7 @@ const app = Vue.createApp({
         confetti({
           particleCount: 100,
           spread: 100,
-          origin: { y: 0.8 }
+          origin: { y: 0.6 }
         });
       }
 
